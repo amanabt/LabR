@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 
-import sqlite3
-import copy
+#import sqlite3
+#import copy
 from datetime import datetime as dt
 from datetime import timedelta
 
@@ -169,9 +169,12 @@ class LabR:
 		print('Yet to be implemented!')
 		return
 	
-	def recordData(self, procedure_idx):
+	def recordTextObservation(self, procedure_idx, text):
 		'''
 		'''
+		observation = Observation()
+		observation._data = text
+		self._procedures[procedure_idx].add_observation(observation)
 		
 		return
 	
@@ -194,9 +197,9 @@ if __name__ == '__main__':
 	labr1.addProjectTitle(input('Enter Project Title: '))
 	labr1.add_purpose(input('Enter Purpose: '))
 	
-	print('Press 1 to add material, to stop adding material, press 0: ')
-	
-	while(int(input()) == 1):
+	print('*******************Materials and Methods*******************')
+
+	while(int(input('Press 1 to add material, to stop adding material, press 0: ')) == 1):
 		material = Material(input('Enter Material Details: '))
 		note     = input('Enter some note: ')
 		material.add_note(note)
@@ -204,13 +207,37 @@ if __name__ == '__main__':
 		labr1.add_material(material)
 		pass
 	
-	print('Press 1 to add Procedure, to stop adding procedure, press 0: ')
 	
-	while(int(input()) == 1):
+	print('*******************Procedures*******************')
+	
+	while(int(input('Press 1 to add a new procedure step, to stop adding procedure, press 0: ')) == 1):
 		step = input('Enter New step: ')
 		labr1.add_new_procedure(step)
 		
+		if int(input('Enter 1 to add an observation, else enter 0: ')) == 1:
+			print('What type of observation would you like to record?')
+			print('1. Text')
+			print('2. Image')
+			print('3. Video')
+			
+			choice = int(input('Your choice(1 - 3): '))
+			
+			if choice == 1:
+				text = input('Enter Text: ')
+				labr1.recordTextObservation(-1, text)
+				pass
+			elif choice == 2:
+				labr1.recordImageObservation()
+				pass
+			elif choice == 3:
+				print('Yet to be implemented:')
+				pass
+			else:
+				print('Please enter values from (1 - 3)')
+			
+			pass
 		pass
+	
 	pass
 
 
