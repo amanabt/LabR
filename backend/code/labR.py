@@ -169,6 +169,12 @@ class LabR:
 		print('Yet to be implemented!')
 		return
 	
+	def recordData(self, procedure_idx):
+		'''
+		'''
+		
+		return
+	
 	def save(self):
 		'''
 		'''
@@ -204,4 +210,7 @@ if __name__ == '__main__':
 		step = input('Enter New step: ')
 		labr1.add_new_procedure(step)
 		
+		pass
+	pass
+
 
